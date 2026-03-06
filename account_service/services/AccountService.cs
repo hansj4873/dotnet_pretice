@@ -1,5 +1,3 @@
-using account_service.Models;
-
 namespace account_service.Services;
 
 public class AccountService
@@ -7,9 +5,9 @@ public class AccountService
     private readonly List<Account> _accounts = new();
     private int _nextId = 1;
 
-    public Account CreateAccount(string name)
+    public Account CreateAccount(UpsertAccountRequest request)
     {
-        var account = new Account(_nextId, name);
+        var account = new Account(_nextId++, request.name);
         
         _accounts.Add(account);
 

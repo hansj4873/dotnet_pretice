@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-using account_service.Services;
-
 namespace account_service.Controllers;
 /*
 [ApiController] (어트리뷰트)

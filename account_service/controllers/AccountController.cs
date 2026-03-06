@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-using account_service.Services;
-
 namespace account_service.Controllers;
 
 [ApiController]
@@ -16,13 +13,20 @@ public class AccountController : ControllerBase
 
     [HttpPost]
     public IActionResult CreateAccount(
-        [FromBody] string name
+        [FromBody] UpsertAccountRequest request
     )
     {
+        /*
+        CreatedAtAction, Created는 201 반환 근데 쓰는 법이 좀 다름 
+        근데 나는 CreatedAtAction만 쓸거임, 그러니까 이것만 기억하면 될 듯
+        (nameof("함수이름"),
+        ("{id}") 있으면 그 값, 없으면 null, // 여기까지 반환할 때 쓰는 url 생성임
+        메세지)
+        */
         return CreatedAtAction(
             nameof(CreateAccount),
             null,
-            _accountService.CreateAccount(name));
+            _accountService.CreateAccount(request));
     }
 
     [HttpGet]

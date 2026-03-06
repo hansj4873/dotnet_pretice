@@ -1,6 +1,4 @@
-using System.Diagnostics.CodeAnalysis;
-
-namespace account_service.Models;
+namespace account_service.Models.Entities;
 
 public class Account
 {
