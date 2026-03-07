@@ -13,7 +13,7 @@ public class AccountController : ControllerBase
 
     [HttpPost]
     public IActionResult CreateAccount(
-        [FromBody] UpsertAccountRequest request
+        [FromBody] CreateAccountRequest request
     )
     {
         /*

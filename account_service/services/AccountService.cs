@@ -5,7 +5,7 @@ public class AccountService
     private readonly List<Account> _accounts = new();
     private int _nextId = 1;
 
-    public Account CreateAccount(UpsertAccountRequest request)
+    public Account CreateAccount(CreateAccountRequest request)
     {
         var account = new Account(_nextId++, request.name);
         
@@ -22,5 +22,26 @@ public class AccountService
     public List<Account> GetAccounts()
     {
         return _accounts;
+    }
+
+    public Account? UpdateAccount(UpdateAccountRequest request)
+    {
+        var account = GetAccount(request.id);
+        if(account == null)
+        {
+            return null;
+        }
+        account.Name = request.name;
+        return account;
+    }
+    public bool DeleteAccount(int id)
+    {
+        var account = GetAccount(id);
+        if(account == null)
+        {
+            return false;
+        }
+        _accounts.Remove(account);
+        return true;
     }
 }
