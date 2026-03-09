@@ -1,6 +1,6 @@
 namespace account_service.Models.Requests;
 
 public record UpdateAccountRequest(
-    int id,
+    [Required]
     string name
 );

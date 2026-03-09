@@ -1,4 +1,4 @@
-namespace account_service.Services;
+namespace account_service.Account.Services;
 
 public class AccountService
 {
@@ -24,9 +24,9 @@ public class AccountService
         return _accounts;
     }
 
-    public Account? UpdateAccount(UpdateAccountRequest request)
+    public Account? UpdateAccount(int id, UpdateAccountRequest request)
     {
-        var account = GetAccount(request.id);
+        var account = GetAccount(id);
         if(account == null)
         {
             return null;
