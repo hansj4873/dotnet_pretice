@@ -8,4 +8,12 @@ public class CustomException : Exception
         StatusCode = statusCode;
         CustomCode = customCode;
     }
+    public static CustomException ValidBadRequest(string message)
+    {
+        return new CustomException(
+            message,
+            StatusCodes.Status400BadRequest,
+            "SYS-" + StatusCodes.Status400BadRequest.ToString()
+        );
+    }
 }

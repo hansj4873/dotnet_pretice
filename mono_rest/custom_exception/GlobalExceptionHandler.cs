@@ -16,18 +16,31 @@ public class GlobalExceptionHandler : IExceptionHandler
     {
         //예외찍기
         _logger.LogError(exception, "exception : {Message}", exception.Message);
-        //필요한 변수 선언
-        int statusCode = StatusCodes.Status500InternalServerError;
-        string title = "InternalServerError";
-        string customCode = "SY-500";
-        //Exception 확인
-        if(exception is CustomException customException)
+        //Exception 확인, showStackTrace는 스택 트레이스를 보여줄건지 정사는 변수
+        var (statusCode, title, customCode, showStackTrace) = exception switch
         {
-            //맞으면 변수 변환
-            statusCode = customException.StatusCode;
-            title = "ServiceError";
-            customCode = customException.CustomCode;
-        }
+            //CustomException의 경우
+            CustomException ce => (
+                ce.StatusCode, 
+                "ServiceError", 
+                ce.CustomCode
+                ,false
+                ),
+            //400, 405 등 잘못된 요청, 경로 등
+            BadHttpRequestException badEx => (
+                badEx.StatusCode,
+                "SystemError",
+                 "SYS-" + badEx.StatusCode.ToString(),
+                 false
+            ),
+            //나머지
+            _ => (
+                StatusCodes.Status500InternalServerError,
+                "InternalServerError",
+                "SYS-500",
+                true
+            )
+        };
         //이거 국제 규격이라고 함
         var problemDetails = new ProblemDetails
         {
@@ -35,13 +48,17 @@ public class GlobalExceptionHandler : IExceptionHandler
             Title = title,
             Detail = exception.Message
         };
+        if (showStackTrace)
+        {
+            
+        }
         //내가 추가로 만든 CustomCode를 problemDetails에 추가
         problemDetails.Extensions.Add("CustomCode", customCode);
 
         httpContext.Response.StatusCode = problemDetails.Status.Value;
 
         await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
-        
+
         return true;
     }
 }

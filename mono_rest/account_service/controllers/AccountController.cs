@@ -1,5 +1,6 @@
 namespace account_service.Controllers;
 
+//알아서 dto랑 json을 비교해서 예외를 던져줌
 [ApiController]
 [Route("account")]
 public class AccountController : ControllerBase
@@ -22,11 +23,6 @@ public class AccountController : ControllerBase
         [FromBody] CreateAccountRequest request
     )
     {
-        //이거 @Valid랑 같은 느낌. request 검사
-        if (!ModelState.IsValid)
-        {
-            return BadRequest();
-        }
         var account = _accountService.CreateAccount(request);
         /*
         CreatedAtAction, Created는 201 반환 근데 쓰는 법이 좀 다름 
@@ -61,15 +57,7 @@ public class AccountController : ControllerBase
         [FromBody] UpdateAccountRequest request
     )
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest();
-        }
         var account = _accountService.UpdateAccount(id, request);
-        if(account == null)
-        {
-            return NotFound();
-        }
         return Ok(account);
     }
     //id기반 삭제
@@ -78,10 +66,7 @@ public class AccountController : ControllerBase
         [FromRoute] int id
     )
     {
-        if (_accountService.DeleteAccount(id))
-        {
-            return NoContent();
-        }
-        return NotFound();
+        _accountService.DeleteAccount(id);
+        return NoContent();
     }
 }
