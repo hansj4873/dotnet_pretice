@@ -1,4 +1,4 @@
-namespace account_service.Services;
+namespace AccountService.Domain.UserDomain;
 
 public class HelloWorldService
 {

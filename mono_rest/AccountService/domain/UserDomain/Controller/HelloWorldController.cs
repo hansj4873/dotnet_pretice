@@ -1,4 +1,4 @@
-namespace account_service.Controllers;
+namespace AccountService.Domain.UserDomain;
 /*
 [ApiController] (어트리뷰트)
 -자동 모델 바인딩 강화

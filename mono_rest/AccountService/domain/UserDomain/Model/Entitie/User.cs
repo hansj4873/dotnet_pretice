@@ -1,6 +1,6 @@
-namespace account_service.Models.Entities;
+namespace AccountService.Domain.UserDomain;
 
-public class Account
+public class User
 {
     public int Id { get; set; }
 
@@ -9,7 +9,7 @@ public class Account
 
     //required가 붙은 걸 다 초기화 했다고 컴파일러한테 알리는 어트리뷰트
     [SetsRequiredMembers]
-    public Account(int id, string name)
+    public User(int id, string name)
     {
         Id = id;
         Name = name;

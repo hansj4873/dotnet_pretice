@@ -1,4 +1,4 @@
-namespace custom_exception;
+namespace GlobalException;
 public class CustomException : Exception
 {
     public int StatusCode {get;} 

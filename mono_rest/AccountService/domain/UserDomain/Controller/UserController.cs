@@ -1,15 +1,15 @@
-namespace account_service.Controllers;
+namespace AccountService.Domain.UserDomain;
 
 //알아서 dto랑 json을 비교해서 예외를 던져줌
 [ApiController]
 [Route("account")]
-public class AccountController : ControllerBase
+public class UserController : ControllerBase
 {
-    private readonly AccountService _accountService;
+    private readonly UserService _userService;
     //의존성 주입
-    public AccountController(AccountService accountService)
+    public UserController(UserService userService)
     {
-        _accountService = accountService;
+        _userService = userService;
     }
     /*
     IActionResult는 그냥 범용성 좋은 느낌
@@ -19,11 +19,11 @@ public class AccountController : ControllerBase
     */
     //생성
     [HttpPost]
-    public IActionResult CreateAccount(
-        [FromBody] CreateAccountRequest request
+    public IActionResult CreateUser(
+        [FromBody] CreateUserRequest request
     )
     {
-        var account = _accountService.CreateAccount(request);
+        var account = _userService.CreateUser(request);
         /*
         CreatedAtAction, Created는 201 반환 근데 쓰는 법이 좀 다름 
         근데 나는 CreatedAtAction만 쓸거임, 그러니까 이것만 기억하면 될 듯
@@ -32,41 +32,41 @@ public class AccountController : ControllerBase
         메세지)
         */
         return CreatedAtAction(
-            nameof(CreateAccount),
+            nameof(CreateUser),
             new { id = account.id },
             account);
     }
     //모든 account 가져오기
     [HttpGet]
-    public IActionResult GetAccounts()
+    public IActionResult GetUsers()
     {
-        return Ok(_accountService.GetAccounts());
+        return Ok(_userService.GetUsers());
     }
     //id로 account 하나 가져오기
     [HttpGet("{id}")]
-    public IActionResult GetAccount(
+    public IActionResult GetUser(
         [FromRoute] int id
     )
     {
-        return Ok(_accountService.GetAccount(id));
+        return Ok(_userService.GetUser(id));
     }
     //id기반 변경(request에 id값이 들어감)
     [HttpPatch("{id}")]
-    public IActionResult UpdateAccount(
+    public IActionResult UpdateUser(
         [FromRoute] int id,
-        [FromBody] UpdateAccountRequest request
+        [FromBody] UpdateUserRequest request
     )
     {
-        var account = _accountService.UpdateAccount(id, request);
+        var account = _userService.UpdateUser(id, request);
         return Ok(account);
     }
     //id기반 삭제
     [HttpDelete("{id}")]
-    public IActionResult DeleteAccount(
+    public IActionResult DeleteUser(
         [FromRoute] int id
     )
     {
-        _accountService.DeleteAccount(id);
+        _userService.DeleteUser(id);
         return NoContent();
     }
 }

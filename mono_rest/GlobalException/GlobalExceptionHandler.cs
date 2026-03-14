@@ -1,6 +1,4 @@
-using System.Diagnostics;
-
-namespace custom_exception;
+namespace GlobalException;
 //@ExceptionHandler 같은 거
 public class GlobalExceptionHandler : IExceptionHandler
 {
