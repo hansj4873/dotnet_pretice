@@ -2,16 +2,25 @@ namespace AccountService.Domain.UserDomain;
 
 public class User
 {
-    public int Id { get; set; }
-
-    //required = 없으면 개체 생성 안됨
-    public required string Name { get; set; }
-
-    //required가 붙은 걸 다 초기화 했다고 컴파일러한테 알리는 어트리뷰트
-    [SetsRequiredMembers]
-    public User(int id, string name)
-    {
-        Id = id;
-        Name = name;
-    }
+    //기본키
+    public long Sq{get;}
+    public string Name {get; set;} = string.Empty;
+    public string Phone {get; set;} = string.Empty;
+    public string Email {get; set;} = string.Empty;
+    public string BasicAddr {get; set;} = string.Empty;
+    public string DetailAddr {get; set;} = string.Empty;
+    public string Post {get; set;} = string.Empty; //우편번호
+    public string Id {get; set;} = string.Empty;
+    public string Password {get; set;} = string.Empty;
+    //날짜 데이터
+    public DateTime Birthday {get; set;}
+    public DateTime JoinDt {get; set;}
+    public DateTime? WithdrawDt {get; set;}
+    public DateTime AgreeDt {get; set;}
+    //Enum값
+    public string Gender {get; set;} = string.Empty;
+    public string Role {get; set;} = string.Empty;
+    public string Status {get; set;} = string.Empty;
+    public long Point {get; set;}
+    public long? CompanySq {get; set;}
 }
