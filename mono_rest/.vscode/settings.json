@@ -1,4 +1,9 @@
 {
     "git.smartCommitChanges": "all",
-    "git.enableSmartCommit": false
+    "git.enableSmartCommit": false,
+    "editor.formatOnType": true,
+    "editor.defaultFormatter": null,
+    "[csharp]": {
+        "editor.defaultFormatter": "ms-dotnettools.csharp"
+    }
 }

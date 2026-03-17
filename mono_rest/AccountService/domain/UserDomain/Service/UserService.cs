@@ -7,14 +7,14 @@ public class UserService
     //내부에서 쓰는 객체반환 함수
     private User FindUserById(int id)
     {
-         return _accounts.FirstOrDefault(a => a.Id == id) ?? 
-         throw UserNotFound.NotFound("id");
+        return _accounts.FirstOrDefault(a => a.Id == id) ??
+        throw UserNotFound.NotFound("id");
     }
     //생성
     public UserResponse CreateUser(CreateUserRequest request)
     {
         var account = new User(_nextId++, request.name);
-        
+
         _accounts.Add(account);
 
         return account.ToResponse();

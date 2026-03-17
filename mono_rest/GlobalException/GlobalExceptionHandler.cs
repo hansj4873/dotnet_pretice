@@ -25,10 +25,10 @@ public class GlobalExceptionHandler : IExceptionHandler
         {
             //CustomException의 경우
             CustomException ce => (
-                ce.StatusCode, 
-                "ServiceError", 
+                ce.StatusCode,
+                "ServiceError",
                 ce.CustomCode
-                ,false
+                , false
                 ),
             //400, 405 등 잘못된 요청, 경로 등
             BadHttpRequestException badEx => (
@@ -57,13 +57,13 @@ public class GlobalExceptionHandler : IExceptionHandler
         if (showStackTrace)
         {
             _logger.LogError(
-                exception, "{ExId}\n{CustomCode}\n{Path}\n{Message}", 
+                exception, "{ExId}\n{CustomCode}\n{Path}\n{Message}",
                 exId, customCode, httpContext.Request.Path.Value, exception.Message);
         }
         else
         {
             _logger.LogWarning(
-                ">{ExId}\n{CustomCode}\n{Path}\n{Message}", 
+                ">{ExId}\n{CustomCode}\n{Path}\n{Message}",
                 exId, customCode, httpContext.Request.Path.Value, exception.Message);
         }
         //내가 추가로 만든 CustomCode를 problemDetails에 추가
