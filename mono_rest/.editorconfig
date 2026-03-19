@@ -1,0 +1,16 @@
+root = true
+
+[*.cs]
+# 인덴트(들여쓰기) 기본 설정
+indent_style = space
+indent_size = 4
+
+# 메서드 체이닝(builder.Property...) 시 들여쓰기 강제
+csharp_indent_block_contents = true
+csharp_indent_braces = false
+csharp_indent_case_contents = true
+csharp_indent_switch_labels = true
+
+# 줄바꿈 시 들여쓰기 유지 옵션
+dotnet_style_parentheses_in_arithmetic_binary_operators = always_for_clarity
+csharp_new_line_before_open_brace = all

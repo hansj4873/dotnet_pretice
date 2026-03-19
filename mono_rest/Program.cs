@@ -1,3 +1,5 @@
+using AccountService;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,10 +9,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//db관련 설정
+var connectingString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<AppDbContext>(options =>
+options.UseNpgsql(connectingString)
+.UseSnakeCaseNamingConvention());
+
 //내가 만든 서비스들 등록
 builder.Services.AddScoped<HelloWorldService>();
 //테스트 상황이라서 안없어지게
-builder.Services.AddSingleton<AccountService>();
+builder.Services.AddScoped<UserService>();
 
 //예외처리 등록
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();

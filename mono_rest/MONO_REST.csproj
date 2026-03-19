@@ -4,7 +4,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>account_service</RootNamespace>
+    <RootNamespace>MONO_REST</RootNamespace>
     <UserSecretsId>d9500034-4860-48d3-92cc-12ecd64d90e0</UserSecretsId>
   </PropertyGroup>
 
