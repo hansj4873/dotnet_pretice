@@ -60,15 +60,18 @@ public class UserConfig : IEntityTypeConfiguration<User>
 
         builder.Property(x => x.Gender)
         .IsRequired()
-        .HasMaxLength(20);
+        .HasMaxLength(20)
+        .HasConversion<string>();
 
         builder.Property(x => x.Role)
         .HasMaxLength(20)
-        .HasDefaultValue("USER");
+        .HasDefaultValue(UserRole.USER)
+        .HasConversion<string>();
 
         builder.Property(x => x.Status)
         .HasMaxLength(20)
-        .HasDefaultValue("NORMAL");
+        .HasDefaultValue(UserStatus.NORMAL)
+        .HasConversion<string>();
 
         builder.Property(x => x.Point)
         .HasDefaultValue(0);

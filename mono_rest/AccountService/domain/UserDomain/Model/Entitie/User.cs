@@ -18,9 +18,9 @@ public class User
     public DateTime? WithdrawDt { get; set; }
     public DateTime AgreeDt { get; set; }
     //Enum값
-    public string Gender { get; set; } = string.Empty;
-    public string Role { get; set; } = string.Empty;
-    public string Status { get; set; } = string.Empty;
+    public UserGender Gender { get; set; }
+    public UserRole Role { get; set; } = UserRole.USER;
+    public UserStatus Status { get; set; } = UserStatus.NORMAL;
     public long Point { get; set; }
     public long? CompanySq { get; set; }
 }

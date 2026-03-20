@@ -1,6 +1,6 @@
 namespace AccountService.Domain.UserDomain;
 
 public record UserResponse(
-    int id,
+    long sq,
     string name
 );
